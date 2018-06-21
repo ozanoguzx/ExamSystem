@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+<head>
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=”icon” type="image/x-icon" href=”favicon.ico” />
+    <title>@ViewBag.Title</title>
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <link href="~/Assets/css/Pagess.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Assets/css/style.css" />
+    <link rel="stylesheet" href="~/Assets/css/dark.css" />
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/Assets/css/animate.min.css" />
+    <link rel="stylesheet" href="~/Assets/css/sliders.css" />
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="~/Assets/css/icon-fonts.css" />
+    @*<script src="~/Assets/js/jquery.blockUI.js"></script>*@
+    <link href="~/Assets/css/alertify.css" rel="stylesheet" />
+    <link href="~/Assets/css/custom.css" rel="stylesheet" />
+    <script src="~/Assets/js/Bilgilendirme.js"></script>
+    <script src="~/Assets/js/jquery.alertify.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Kalam:700,400' rel='stylesheet' type='text/css'>
+    <script src="~/Assets/js/modernizr.js"></script>
+    <script type="text/javascript">
+        function PanelOpen() {
+            document.getElementById("PanelStudent").hidden = '';
+            document.getElementById("PanelStudent").style.visibility = 'visible';
+            document.getElementById("PanelSuperAdmin").hidden = '';
+            document.getElementById("PanelSuperAdmin").style.visibility = 'visible';
+        }
+        function PanelClose() {
+            document.getElementById("PanelSuperAdmin").hidden = '';
+            document.getElementById("PanelSuperAdmin").style.visibility = 'visible';
+            document.getElementById("PanelStudent").hidden = '';
+            document.getElementById("PanelStudent").style.visibility = 'visible';
+        }
+    </script>
+</head>
+<body class="preloader2 dark_sup_menu light_header">
+    <div id="preloader">
+        <div class="spinner1">
+            <div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div>
+        </div>
+        <div class="spinner2">
+            <div class="sk-dot1"></div><div class="sk-dot2"></div>
+        </div>
+    </div>
+
+    <div id="main_wrapper">
+        <header id="site_header">
+            <div class="topbar ">
+                <!-- class ( topbar_colored  ) -->
+                <div class="content clearfix">
+
+                    <div class="top_details clearfix f_right">
+                        <div class="languages-select languages-drop">
+                            @{
+                                if (Session["UserName"] != null)
+                                {
+                                    <span><i class="ico-user"></i><span>@Session["UserName"].ToString()</span></span>
+                                }
+                                else
+                                {
+                                    <span><i class="ico-user"></i><span>Kullanıcı Adı</span></span>
+                                }
+
+                            }
+                            <br />
+                            @{
+                                <i class="icon ico-close"></i><a href="@Url.Action("LogOut", "Home")" style="color:Gray;">Çıkış Yap</a>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="top-socials box_socials f_left">
+                        <div style="margin-top:12px;">
+                            <span></span>
+                            <span></span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End content -->
+                <span class="top_expande not_expanded">
+                    <i class="no_exp ico-angle-double-down"></i>
+                    <i class="exp ico-angle-double-up"></i>
+                </span>
+            </div>
+            <!-- End topbar -->
+
+            <div id="navigation_bar">
+                <div class="content">
+                    <div id="logo">
+                        @{
+                            if (Session["UserType"] != null)
+                            {
+                                int type = Convert.ToInt32(Session["UserType"]);
+                                if (type > 0)
+                                {
+                                    <a href="@Url.Action("Index", "Student")">
+                                        <img class="logo_dark" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
+                                        <img class="logo_light" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Index","Admin")">
+                                        <img class="logo_dark" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
+                                        <img class="logo_light" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
+                                    </a>
+                                }
+                            } }
+
+
+                    </div>
+                    @{
+                        if (Session["UserType"] != null)
+                        {
+                            int type = Convert.ToInt32(Session["UserType"]);
+                            if (type > 0)
+                            {
+                                <div ID="PanelStudent">
+                                    <nav id="main_nav">
+                                        <div id="nav_menu">
+                                            <span class="mobile_menu_trigger">
+                                                <a href="#" class="nav_trigger">Menu<span></span></a>
+                                            </span>
+                                            <ul id="navy" class="clearfix">
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Index","Student")"><span><b style="font-family:Arial">Sınavlar</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu"><a style="font-size:small" href="@Url.Action("Index","Student")">Tüm Sınavlar</a></li>
+                                                        <li class="normal_menu"><a style="font-size:small" href="@Url.Action("PastExam","Student")">Geçmİş sınavlarım</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            }
+                            else
+                            {
+                                <div ID="PanelSuperAdmin">
+                                    <nav id="main_nav">
+                                        <div id="nav_menu">
+                                            <span class="mobile_menu_trigger">
+                                                <a href="#" class="nav_trigger">Menu<span></span></a>
+                                            </span>
+                                            <ul id="navy" class="clearfix">
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Index","Question")"><span><b style="font-family:Arial">Sorular</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Sorular", "Index", "Question")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Soru Ekle", "Add", "Question")</li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Sınavlar</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Sınavlar", "Examlist", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınav Ekle", "Add", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınav Sonuçları", "ExamResult", "Exam")</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            }
+                        }
+                    }
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </header>
+        <section class="content_section page_title">
+            <div class="content clearfix">
+                <h3 class="">
+                    @ViewBag.UstBaslik
+                </h3>
+
+            </div>
+        </section>
+        <!-- İÇERİKK -->
+        @RenderBody()
+        <a href="#" class="hm_go_top">Yukarı</a>
+    </div>
+
+    <script src="~/Assets/js/jquery.js" type="text/javascript"></script>
+    <script src="~/Assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Assets/js/plugins.js" type="text/javascript"></script>
+    <script src="~/Assets/js/isotope.pkgd.min.js" type="text/javascript"></script>
+    <script src="~/Assets/js/progressbar.min.js" type="text/javascript"></script>
+    <script src="~/Assets/js/functions.js"></script>
+    <script src="~/Assets/js/chart.min.js" type="text/javascript"></script>
+
+</body>
+
+
+</html>

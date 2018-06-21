@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bilge Adam | Sınav</title>
+    <!--Bootstrap-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Assets/newassets/assets/css/bootstrap.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="~/Assets/newassets/assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/newassets/assets/js/npm.js"></script>
+    <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <!--Kampus Css-->
+    <link href="~/Assets/newassets/assets/css/bakampus.css" rel="stylesheet" />
+
+    <!--Google Font Source Sans Pro-->
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&subset=latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="container-fluid">
+        <!--Header Starts-->
+        <header>
+            <nav class="navbar main-navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kampusNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Action("Index", "Student")"><img src="~/Assets/newassets/assets/images/bakampus-logo.png"></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="kampusNavbar">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-green">
+                                <a href="@Url.Action("PastExam", "Student")">
+                                    <span class="menu-element"><img src="~/Assets/newassets/assets/images/education-icon.png" width="51" height="52"><br>GEÇMİŞ SINAVLARIM</span> <span class="hover-border hover-green"></span>
+                                </a>
+                            </li>
+                            @{
+                                if (Session["UserName"] != null)
+                                {
+                                    <li class="nav-purple ogrenciadi"><a href="@Url.Action("LogOut", "Home")"><span class="menu-element"><img src="~/Assets/newassets/assets/images/user-icon.png" width="50" height="53"><br>@Session["UserName"].ToString()</span>
+                                        <br />
+                                        <span>Çıkış Yap</span>
+                                        <span class="hover-border hover-purple"></span></a>
+                            </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-purple ogrenciadi"><a href="#"><span class="menu-element"><img src="~/Assets/newassets/assets/images/user-icon.png" width="50" height="53"><br>KULLANICI ADI</span><span class="hover-border hover-purple"></span></a></li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header><!--Header Ends-->
+    </div>
+
+
+    <!--Burası RenderBody() yeri-->
+    @RenderBody()
+
+
+    <div class="container-fluid footer">
+        <footer>
+            <div class="container">
+                <nav class="navbar navbar-social">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="@Url.Action("Index", "Student")"><img src="~/Assets/newassets/assets/images/footer-logo.png" width="232" height="64"></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="tel:4443330"><img src="~/Assets/newassets/assets/images/icon-phone.png" height="27"></a></li>
+                        <li><a href="#"><img src="~/Assets/newassets/assets/images/icon-footer-linkedin.png" width="27" height="27"></a></li>
+                        <li><a href="#"><img src="~/Assets/newassets/assets/images/icon-footer-facebook.png" width="27" height="27"></a></li>
+                        <li><a href="#"><img src="~/Assets/newassets/assets/images/icon-footer-twitter.png" width="27" height="27"></a></li>
+                        <li><a href="#"><img src="~/Assets/newassets/assets/images/icon-footer-instagram.png" width="27" height="27"></a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

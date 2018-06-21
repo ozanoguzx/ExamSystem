@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Sorular";
+    ViewBag.UstBaslik = "Sorular";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+@using UI.Models
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<DAL.Data.Question>
+
+<script>
+    $("[name='my-checkbox']").bootstrapSwitch();
+</script>
+
+<section class="content_section">
+    <div class="content_spacer">
+        <div class="content">
+            <div class="table_container table-responsive">
+                <div>
+
+                    <div class="centered">
+                    </div>
+                    <table class="table table-bordered table-striped table-responsive table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Açıklama</th>
+                                <th scope="col">Konu</th>
+                                <th scope="col">Ekleyen</th>
+                                <th scope="col">Doğru Cevap</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">İşlem</th>
+                                <th></th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @{
+
+                                            <a href="#popup-dialog-box-@item.Id" class=" medium_btn popup-with-zoom-anim">
+                                                Soruyu İncele
+                                            </a>
+                                        }
+                                    </td>
+                                    <div id="popup-dialog-box-@item.Id" class="zoom-anim-dialog small-dialog mfp-hide">
+                                        <div class="content_section">@Html.Raw(@item.Content)</div>
+                                    </div>
+                                    <td>@item.Subject.Name</td>
+                                    @{
+                                        @*int myType = item.Type;
+                                                if (myType == 1)
+                                                {
+                                            <td>Test</td>}
+                                                else
+                                                {
+                                            <td>Proje</td>}*@
+                                    }
+                                    <td>@item.Trainer.FullName</td>
+                                    <td>@item.RightAnswer</td>
+                                    @{
+                                        @*string myBool = ((bool)item.Deleted) ? "true" : "false";
+                                            if (myBool == "false")
+                                            {
+                                                <td>Aktif</td>}
+                                            else
+                                            {
+                                                <td>Pasif</td>}*@
+                                    }
+                                    <td><a onclick="return confirm('İşlemi yapmak istediğnize emin misiniz?');" id="" title="Sil" href="Delete/@item.Id" style="color:Red;">Sil</a></td>
+                                    <td><a id="" title="Düzenle" href="Add/@item.Id">Güncelle</a></td>
+                                </tr>
+                                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight">
+                <span id="İcerik_LabelSayi"><span class="label label-info"><strong>@ViewBag.Ezgi</strong></span> adet soru var...</span>
+            </div>
+
+            <div class="pagedList">
+                @Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }), PagedListRenderOptions.PageNumbersOnly)
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="col-sm-6 col-lg-4">
+    <p>
+        <input id="switch-state" type="checkbox" checked>
+    </p>
+</div>

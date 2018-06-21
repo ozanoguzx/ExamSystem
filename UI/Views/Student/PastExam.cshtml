@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DAL.Data.ExamOfStudent>
+@{
+    ViewBag.Title = "Oğrenci Sınav Sonucları";
+    ViewBag.UstBaslik = "Oğrenci Sınav Sonucları";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div class="container-fluid banner">
+    <div class="container banner-heading">
+        <h1 class="sayfa-baslik">Bilge Adam Sınav Sistemi - Geçmiş Sınavlarım</h1>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="tabs-body">
+                    <li data-content="inbox" class="selected" style="list-style:none">
+                        <div class="form_row clearfix">
+                            <div class="my_col_third">
+                            </div>
+                            <div class="my_col_third">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                            </div>
+                            <table class="table table-bordered table-striped table-responsive table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col">Adı</th>
+                                        <th scope="col">Soyadı</th>
+                                        <th scope="col">Sınav Adı</th>
+                                        <th scope="col">Tarihi</th>
+                                        <th scope="col">Puan</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    @foreach (DAL.Data.ExamOfStudent item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Student.FirstName</td>
+                                            <td>@item.Student.LastName</td>
+                                            <td>@item.Exam.Name</td>
+                                            <td>@item.Exam.ExamDate</td>
+                                            <td>@item.Score</td>
+                                            <td>@Html.ActionLink("Detay", "ExamStudentRigth", new { item.Id }, new { @class = "btn btn-danger" })</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

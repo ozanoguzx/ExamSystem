@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DAL.Data.QuestionOfStudent>
+@{
+    ViewBag.Title = "Ogrenci Cevap Anahtarı";
+    ViewBag.UstBaslik = "Ogrenci Cevap Anahtarı";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div class="container-fluid banner">
+    <div class="container banner-heading">
+        <h1 class="sayfa-baslik">Bilge Adam Sınav Sistemi - Verilen Cevaplar</h1>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <section class="content_section">
+        <div class="content row_spacer clearfix">
+            <div class="hm-tabs tabs1">
+
+                <ul class="tabs-body">
+                    <li data-content="inbox" class="selected">
+                        <div class="form_row clearfix">
+                            <div class="my_col_third">
+                            </div>
+                            <div class="my_col_third">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                            </div>
+                            <table class="table table-bordered table-striped table-responsive table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col">Soru No</th>
+                                        <th scope="col">Ogrenci Cevabı</th>
+                                        <th scope="col">Sonuc</th>
+                                    </tr>
+                                    @{ 
+                                        int count = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.AnswerOfStudent</td>
+
+                                            @if (item.IsTrue == true)
+                                            {
+                                                <td>Dogru</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Yanlış</td>
+                                            }
+                                        </tr>
+                                        {
+                                            count++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+                                            }
+
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="086c1cdeb1164b4eaff6831c8515dfba" Name="Diagram1">
+        <EntityTypeShape EntityType="BasModel.Classroom" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Exam" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.ExamOfStudent" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.ExamQuestion" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Presentation" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Question" Width="1.5" PointX="12.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.QuestionOfStudent" Width="1.5" PointX="12.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Section" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Student" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Subject" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasModel.Trainer" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="BasModel.FK_CLASSROOMS_SECTIONS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_CLASSROOMS_TRAINERS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_Exam_CLASSROOMS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_ExamQuestions_CLASSROOMS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_Exam_TRAINERS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_ExamOfStudent_Exam" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_ExamQuestions_Exam" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_ExamOfStudent_STUDENTS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_QuestionOfStudent_ExamOfStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_PRESENTATIONS_STUDENTS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_PRESENTATIONS_TRAINERS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_Question_SUBJECTS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.FK_Question_TRAINERS" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.ExamToSubject" ManuallyRouted="false" />
+        <AssociationConnector Association="BasModel.StudentToClassroom" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

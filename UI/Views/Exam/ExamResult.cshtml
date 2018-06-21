@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Sınav Listesi";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+    ViewBag.UstBaslik = "Sınav Listesi";
+}
+
+@using UI.Models
+@model ExamVM
+
+
+@*<script>
+        function SectionChange()
+        {
+            var sectionID2 = $("#dropdownListCategory").val();
+            var link = "/Exam/GetClassRooms"
+        $.post(link, { sectionID: sectionID2 }, function (veri) {
+            alert(sectionID2);
+            for (var i = 0; i < veri.length; i++) {
+
+                $("#dropdownListCategory2").append('<option value="' + veri[i].ClassRoomID + '">' + veri[i].ClassName + '</option>');
+            }
+
+        })
+        }
+    </script>*@
+
+
+
+@*<script type="text/javascript">
+
+        function SectionChange() {
+            var SectionId1 = $('#dropdownListCategory').val();
+
+        }
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: '/Exam/GetClassRooms',
+            data: { SectionId: SectionId1 },
+
+            success: function (data) {
+                alert("dwdad");
+                $.each(data, function (i, item) {
+                    $("#dropdownListCategory2").append('<option value="' + item.ClassRoomID + '">' + item.ClassName + '</option>');
+                })
+            }
+
+        });
+
+
+
+    </script>*@
+
+
+@using (Html.BeginForm("ExamResult", "Exam", FormMethod.Post, null))
+{
+    <section class="content_section">
+
+        <div class="content row_spacer clearfix">
+            <div class="hm-tabs tabs1">
+
+                <ul class="tabs-body">
+                    <li data-content="inbox" class="selected">
+                        <div class="form_row clearfix">
+                            <div class="my_col_third">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                            Bölüm
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                                @*<select id="ddlSectionID" name="ddlSectionID" class="dropdown" onchange="SectionChange();">
+                                        @foreach (SelectListItem item in Model.SectionList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>*@
+
+                                @Html.DropDownListFor(x => x.SectionID, Model.SectionList, new { @class = "dropdown", @id = "dropdownListCategory", onchange = "SectionChange();" })
+
+                            </div>
+                            <div class="my_col_third">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                            Sınıf
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                                @*<select id="dropdownListCategory" name="ddlSectionID" class="dropdown" onchange="SectionChange();">
+                                        @foreach (SelectListItem item in Model.ClassList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>*@
+                                @Html.DropDownListFor(x => x.ClassroomID, Model.ClassList, new { @class = "dropdown", @id = "dropdownListCategory2" })
+                            </div>
+                            <div class="my_col_third">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+
+                                <button type="submit" class="btn_a medium_btn bottom_space col-md-offset-3 " target=" _self" href="#">
+                                    <span><i class="in_left ico-arrow-right2"></i><span>Filtrele</span><i class="in_right ico-arrow-right2"></i></span>
+                                </button>
+                            </div>
+
+
+
+
+                            @if (Model.Examlist != null)
+                            {
+                                <table class="table table-bordered table-striped table-responsive table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">SınavAdı</th>
+                                            <th scope="col">Tarih</th>
+                                            <th scope="col">Ekleyen</th>
+                                            <th></th>
+                                        </tr>
+
+                                        @foreach (DAL.Data.Exam item in Model.Examlist)
+                                        {
+                                            <tr>
+                                                <td>@item.Name</td>
+                                                <td>@item.ExamDate</td>
+                                                <td>@item.Trainer.FullName</td>
+                                                <td>@Html.ActionLink("Detay", "StudentResult", new { item.Id }, new { @class = "btn btn-danger" })</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+}

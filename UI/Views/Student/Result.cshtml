@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Sınav Sonucu";
+    ViewBag.UstBaslik = "Sonuç";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@using DAL.Data;
+@model ExamOfStudent
+
+<div class="container-fluid banner">
+    <div class="container banner-heading">
+        <h1 class="sayfa-baslik">Bilge Adam Sınav Sistemi - Sınavlarım</h1>
+    </div>
+</div>
+<section class="content_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-12">
+                @{
+                    <h3><i class="ico-user"></i><span>@Session["UserName"].ToString()</span></h3>
+                }
+                <br />
+            @if (Session["Score"] != null)
+            {
+                <h2>Sınav Sonucunuz: @Session["Score"].ToString()</h2>
+                <div style="animation-delay: 300ms;" class="progress_bar" data-progress-val="@Session["Score"].ToString()" data-progress-animation="easeOutQuad" data-progress-delay="300" data-progress-color="#0BACB8">
+                    <div class="fill_con">
+                        <div style="background: rgb(11, 172, 184) none repeat scroll 0% 0%; width: 80%;" class="fill">
+                            <span style="opacity: 1; left: 0px;" class="title">Sonuç</span>
+                            <span class="value"><span class="num">asd</span><span>%</span></span>
+                        </div>
+                    </div>
+                </div>
+                <h3>@Html.ActionLink("Geçmiş sınavlarınızı görmek için", "PastExam", "Student")</h3>
+            }
+            </div><!-- Grid 6 -->
+
+            <div class="col-md-6">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <img height="200" width="400" src="~/Assets/images/icons/bilgeadamlogo.png" />
+            </div>
+        </div>
+    </div>
+</section>
+

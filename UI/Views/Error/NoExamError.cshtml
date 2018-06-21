@@ -1,0 +1,129 @@
+﻿@*@model string
+@{
+    ViewBag.Title = "Sınav Bulunamdı";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+
+<h2 style="margin-top:200px; margin-left:32%">Aradığınız Sınav Bulunamadı</h2>
+<h3>@ViewBag.message</h3>*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bilge Adam Sınav Sistemi Giriş Ekranı</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Assets/css/alertify.css" rel="stylesheet" />
+    <script src="~/Assets/js/Bilgilendirme.js"></script>
+    <script src="~/Assets/js/jquery.alertify.min.js"></script>
+    <link rel="stylesheet" href="~/Assets/css/style.css" />
+    <link rel="stylesheet" href="~/Assets/css/dark.css" />
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/Assets/css/animate.min.css" />
+    <link rel="stylesheet" href="~/Assets/css/sliders.css" />
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="~/Assets/css/icon-fonts.css" />
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Kalam:700,400' rel='stylesheet' type='text/css'>
+    <script src="js/modernizr.js"></script>
+
+    <!-- Windows 8: see http://msdn.microsoft.com/en-us/library/ie/dn255024%28v=vs.85%29.aspx for details -->
+</head>
+<body class="preloader2 dark_sup_menu light_header">
+    <div class="container">
+        <div id="preloader">
+            <div class="spinner1">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            <div class="spinner2">
+                <div class="sk-dot1"></div>
+                <div class="sk-dot2"></div>
+            </div>
+        </div>
+        <div id="main_wrapper">
+            <div class="container">
+                <section class="content_section">
+                    <div class="container row_spacer clearfix">
+                        <div class="content">
+                            <div class="main_desc centered">
+                                <br />
+                                <p><b>Ooopps.!</b> 
+                                <br />
+                                <br /> 
+                                @TempData["message"]</p>
+                            </div>
+                            <div class="my_col_third on_the_center">
+                                <div class="search_block large_search">
+                                    <form class="widget_search" method="get" action="">
+                                        <div class="clear"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="page404">
+                                <span>404<span class="face404"></span></span>
+                            </div>
+                            <div class="centered">
+                                @{
+                                    if (Session["UserType"] != null)
+                                    {
+                                        int type = Convert.ToInt32(Session["UserType"]);
+                                        if (type > 0)
+                                        {
+                                            <a href="@Url.Action("Index","Student")" target="_self" class="btn_a medium_btn bottom_space">
+                                                <span><i class="in_left ico-home5"></i><span>Giriş Sayfasına Dön</span><i class="in_right ico-home5"></i></span>
+                                            </a>
+                                        }
+                                        else if (type == 0)
+                                        {
+                                            <a href="@Url.Action("Index","Admin")" target="_self" class="btn_a medium_btn bottom_space">
+                                                <span><i class="in_left ico-home5"></i><span>Giriş Sayfasına Dön</span><i class="in_right ico-home5"></i></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("LogIn","Home")" target="_self" class="btn_a medium_btn bottom_space">
+                                                <span><i class="in_left ico-home5"></i><span>Giriş Sayfasına Dön</span><i class="in_right ico-home5"></i></span>
+                                            </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("LogIn","Home")" target="_self" class="btn_a medium_btn bottom_space">
+                                            <span><i class="in_left ico-home5"></i><span>Giriş Sayfasına Dön</span><i class="in_right ico-home5"></i></span>
+                                        </a>
+                                    } }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="hm_go_top">Yukarı</a>
+    <script src="~/Assets/js/jquery.js" type="text/javascript"></script>
+    <script src="~/Assets/js/plugins.js" type="text/javascript"></script>
+    <script src="~/Assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Assets/js/wobbly-min.js" type="text/javascript"></script>
+    <script src="~/Assets/js/isotope.pkgd.min.js" type="text/javascript"></script>
+    <script src="~/Assets/js/functions.js"></script>
+    <script type="text/javascript">
+        function Hata() {
+            alertify.log('<strong>Kullanıcı Adı veya Şifreniz Hatalı.</strong>', 'error');
+        }
+        function Blocked() {
+            alertify.log('<strong>Bu kullanıcı AKTİF değildir.</strong>', 'error');
+        }
+    </script>
+</body>
+</html>

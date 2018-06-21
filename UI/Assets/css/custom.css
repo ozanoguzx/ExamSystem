@@ -1,0 +1,129 @@
+﻿.question > p span {
+    font-family:Tahoma, sans-serif !important;
+    font-size: 12pt !important;
+}
+.select-answer{
+    float:left;
+    font-size:15px;
+    margin-top:7px;
+    margin-right:10px;
+}
+.answer-button{
+    background-color:#435a68;
+    color:#ffffff;
+    padding:5px;
+    padding-left:3em;
+    border-radius:5px;
+    margin-bottom:10px;
+}
+
+
+
+/*.question > .aciklama {
+    font-family:Tahoma, sans-serif !important;
+    font-size: 12pt !important;
+    margin-bottom: 3px;
+    margin-left: 0px;
+    margin-right: 2px !important;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 25px;
+    border-color: #E0E0E0;
+    background-color: white;
+    height: 100%;
+}*/
+
+.question > .conten-answer {
+    margin-bottom: 3px;
+    margin-left: 0px;
+    border: 1px solid #000000;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 25px;
+    border-color: #E0E0E0;
+    background-color: white;
+    height: 100%;
+    font-size:medium;
+}
+
+
+/*.question #xxx{
+    margin-top: 30px !important;
+}*/
+
+.question .ustAlt {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size:medium;
+}
+.ustAlt > p span{
+    font-size:medium !important;
+}
+
+.examLabel{
+    padding: 2px;
+    padding-left:10px;
+    padding-right:10px;
+    border: 2px;
+    border-style:ridge;
+    border-color: white;
+    border-radius: 5px;
+}
+.exam-aktif{
+    margin-left: 35px; 
+    margin-top: 8px; 
+    border: initial; 
+    background-color:red;
+    /*background-color: #1ea418;*/ 
+    padding: 15px; 
+    border-radius: 15px;
+}
+.exam-pasif{
+    margin-left: 35px; 
+    margin-top: 8px; 
+    border: initial; 
+    background-color: #bb4040; 
+    padding: 15px; 
+    border-radius: 15px;
+}
+
+#examTime{
+
+    width:270px; 
+    height:90px;
+    float:right; 
+    /*margin-top:1%;*/ 
+    text-align:center; 
+    background-color:#de5e5e; 
+    color:white; 
+    font-size:x-large; 
+    /*border-radius: 5px;*/ 
+    padding-left: 8px; 
+    padding-right:8px; 
+    padding-top:32px; 
+    /*padding-bottom:10px;*/
+    margin-bottom:0 !important;
+}
+
+.exam-heading{
+    height:50px;
+    background-color:#223241;
+    /*margin-top:20px;*/
+    margin-bottom:30px;
+}
+#baLogo{
+    float:left; 
+    margin-bottom:20px;
+    margin-top:20px; 
+    width:150px;
+}
+.option{
+    margin-left:5px;
+    background-color:#ffffff;
+    color:#435a68;
+    border-color:#ffffff;
+}
+ .option:focus{
+    background-color:#f39420;
+    /*border-color:#ffffff;*/
+}

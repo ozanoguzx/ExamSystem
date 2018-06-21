@@ -1,0 +1,102 @@
+﻿@using DAL.Data
+@model List<Exam>
+@{
+    ViewBag.Title = "Bilge Adam Sınav Sistemi";
+    ViewBag.UstBaslik = "Bilge Adam Sınav Sistemi";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<div class="container-fluid content">
+    <!--Content Starts-->
+    <div class="container-fluid banner">
+        <div class="container banner-heading">
+            <h1 class="sayfa-baslik">Bilge Adam Sınav Sistemi - Sınavlarım</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row content-items">
+            @foreach (var item in Model)
+            {
+                if (item.State == true && item.ExamStartTime > DateTime.Now)
+                {
+                    <div class="col-sm-3 single-item" id="item-blue">
+                        <div class="item-content">
+                            <img class="item-icon" src="~/Assets/newassets/assets/images/item-projeler.png" height="80">
+                            <h3 class="item-heading">@item.Name</h3>
+                            <h4 class="sinav-durumu">Sınav Durumu : <span class="durum-sonuc">Başlamadı</span><br><span class="not"></span></h4>
+
+                        </div>
+                        <div class="overlay-buton overlay-blue"></div>
+                        <div class="plus-buton"></div>
+                    </div>
+                }
+                else if (item.State == true && item.ExamEndTime > DateTime.Now && DateTime.Now > item.ExamStartTime)
+                {
+                    foreach (var ex in ViewBag.ExOfStudent)
+                    {
+                        if (ex.ExamID == item.Id && ex.IsActive == true && ex.Score == 0)
+                        {
+                            <a href="@Url.Action("information", "Student", new { item.Id })">
+                                <div class="col-sm-3 single-item" id="item-blue">
+                                    <div class="item-content">
+                                        <img class="item-icon" src="~/Assets/newassets/assets/images/item-projeler.png" height="80">
+                                        <h3 class="item-heading">@item.Name</h3>
+                                        <h4 class="sinav-durumu">Sınav Durumu : <span class="durum-sonuc">Devam Ediyor</span><br><span class="sure">Süre: @Html.GetHour((DateTime)item.ExamStartTime, (DateTime)item.ExamEndTime)</span></h4>
+                                    </div>
+                                    <div class="overlay-buton overlay-blue"></div>
+                                    <div class="plus-buton"></div>
+                                </div>
+                            </a>
+                        }
+                        else if (ex.ExamID == item.Id && ex.IsActive == false && ex.Score >= 0)
+                        {
+                            <div class="col-sm-3 single-item" id="item-green">
+                                <div class="item-content">
+                                    <img class="item-icon" src="~/Assets/newassets/assets/images/item-projeler.png" height="80">
+                                    <h3 class="item-heading">@item.Name</h3>
+                                    <h4 class="sinav-durumu">Sınav Durumu : <span class="durum-sonuc">Girildi</span><br>Not:<span class="not"> @ex.Score</span></h4>
+
+                                </div>
+                                <div class="overlay-buton overlay-green"></div>
+                                <div class="plus-buton"></div>
+                            </div>
+                        }
+                    }
+                }
+                else if (item.State == true && DateTime.Now > item.ExamEndTime)
+                {
+                    foreach (var ex in ViewBag.ExOfStudent)
+                    {
+                        if (ex.ExamID == item.Id && ex.IsActive == false && ex.Score >= 0 && ex.Score <= 100)
+                        {
+                            <div class="col-sm-3 single-item" id="item-green">
+                                <div class="item-content">
+                                    <img class="item-icon" src="~/Assets/newassets/assets/images/item-projeler.png" height="80">
+                                    <h3 class="item-heading">@item.Name</h3>
+                                    <h4 class="sinav-durumu">Sınav Durumu : <span class="durum-sonuc">Girildi</span><br>Not:<span class="not"> @ex.Score</span></h4>
+
+                                </div>
+                                <div class="overlay-buton overlay-green"></div>
+                                <div class="plus-buton"></div>
+                            </div>
+                        }
+                        else if (ex.ExamID == item.Id && ex.IsActive == true && ex.Score == 0)
+                        {
+                            <div class="col-sm-3 single-item" id="item-red">
+                                <div class="item-content">
+                                    <img class="item-icon" src="~/Assets/newassets/assets/images/item-projeler.png" height="80">
+                                    <h3 class="item-heading">@item.Name</h3>
+                                    <h4 class="sinav-durumu">Sınav Durumu : <span class="durum-sonuc">Sınava Girmediniz</span><br>Not:<span class="not"> @ex.Score</span></h4>
+
+                                </div>
+                                <div class="overlay-buton overlay-red"></div>
+                                <div class="plus-buton"></div>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div><!--Content Items Ends-->
+    </div>
+</div>

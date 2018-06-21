@@ -1,0 +1,43 @@
+﻿@model DAL.Data.Exam
+@{
+    ViewBag.Title = "Bilgilendirme";
+    ViewBag.UstBaslik = "Bilgilendirme";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<div class="container-fluid banner">
+    <div class="container banner-heading">
+        <h1 class="sayfa-baslik">Bilge Adam Sınav Sistemi - Sınav Bilgilendirme</h1>
+    </div>
+</div>
+
+@if (Model.State == true)
+{
+    <section class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+
+                <h2 class="title1 upper">@Model.Name</h2>
+                <br />
+                <h5>SINAV SÜRESİ  Süre:<label>@Html.GetHour((DateTime)Model.ExamStartTime, (DateTime)Model.ExamEndTime)</label></h5>
+                <h6>Her Soru <strong> @ViewBag.Score</strong> Puandır.</h6>
+                <p>
+                    1. Katılımcılar sınav sırasında yanlarında Telsiz, Cep Telefonu, Çağrı Cihazı,Kitap, Ders Notu, vb. bulunduramazlar.
+                </p>
+                <p>
+                    2. Katılımcıların; sınavın yapılacağı kurumun, hassasiyet gösterdiği kuralları gözeterek sınav yerinde olmaları, sınav düzeni ve katılımcılarımızın mağdur olmamaları açısından önemlidir.
+                </p>
+                <p>
+                    3. “Yoklama formu” katılımcılar tarafından imzalanmalıdır.
+                </p>
+                <p>
+                    4. Sınavlarda kopya çekenler ve verenler hakkında tutanak düzenlenerek ilgilinin sınavı geçersiz sayılır ve bu kişiler sınav mahallinden çıkartılır.
+                </p>
+                <p>
+                    5. Katılımcıların, sorulara verdikleri yanıtları herhangi bir yere yazmaları ve bunu sınav salonundan dışarıya çıkarmaları yasaktır.
+                </p>
+
+            </div>
+            @Html.ActionLink(" Sınavı Başlat", "Exam", new { Model.Id }, new { @class = " main_button color3 medium_btn bottom_space in_left ico-bell4 col-md-offset-9" })
+        </div>
+    </section>
+}

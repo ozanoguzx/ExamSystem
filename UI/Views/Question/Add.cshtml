@@ -1,0 +1,267 @@
+﻿@using UI.Models
+@model QuestionVM
+@{
+    if (Model.IsUpdate)
+    {
+        ViewBag.Title = "Soru Güncelle";
+        ViewBag.UstBaslik = "Soru Güncelle";
+    }
+    else
+    {
+        ViewBag.UstBaslik = "Soru Ekle";
+        ViewBag.Title = "Soru Ekle";
+    }
+
+
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+
+<script type="text/javascript">
+    CKEDITOR.replace('description',
+    {
+        toolbar: 'Basic',
+        uiColor: '#B70000'
+    });
+</script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+
+
+<script type="text/javascript">
+
+    function Clear() {
+        document.getElementById("dropdownListCategory").selectedIndex = "0";
+        document.getElementById("CkPublic").value = "";
+        document.getElementById("AreaA").value = "";
+        document.getElementById("AreaB").value = "";
+        document.getElementById("AreaC").value = "";
+        document.getElementById("AreaD").value = "";
+        document.getElementById("AreaE").value = "";
+        document.getElementById("dropDownListRightAnswer").selectedIndex = "0";
+    }
+    $(function CK() {
+
+        CKFinder.setupCKEditor(null, '@Url.Content("~/Content/ckfinder/")');
+    });
+    $(document).ready(function () {
+        //document.getElementById("projectPanel").style.visibility = 'hidden';
+        document.getElementById("testPanel").style.visibility = 'hidden';
+        document.getElementById("mainPanel").hidden = 'hidden';
+    });
+    function PanelAc() {
+        if (document.getElementById("dropdownListCategory").value > 0) {
+            document.getElementById("mainPanel").hidden = '';
+            document.getElementById("mainPanel").style.visibility = 'visible';
+            document.getElementById("testPanel").hidden = '';
+            document.getElementById("testPanel").style.visibility = 'visible';
+            //document.getElementById("projectPanel").hidden = 'hidden';
+            CK();
+        }
+        else {
+            if (document.getElementById("dropdownListCategory").value <= 0) {
+                Bilgilendirme('Lütfen öncelikle konu seçiniz.', 'error');
+            }
+            //document.getElementById("projectPanel").style.visibility = 'hidden';
+            document.getElementById("testPanel").style.visibility = 'hidden';
+            document.getElementById("mainPanel").hidden = 'hidden';
+        }
+        //if (document.getElementById("dropdownListExamType").value == 1) {
+        //    document.getElementById("mainPanel").hidden = '';
+        //    document.getElementById("mainPanel").style.visibility = 'visible';
+        //    document.getElementById("testPanel").hidden = '';
+        //    document.getElementById("testPanel").style.visibility = 'visible';
+        //    document.getElementById("projectPanel").hidden = 'hidden';
+        //    CK();
+        //}
+        //else if (document.getElementById("dropdownListExamType").value == 2) {
+        //    document.getElementById("mainPanel").hidden = '';
+        //    document.getElementById("mainPanel").style.visibility = 'visible';
+        //    document.getElementById("projectPanel").hidden = '';
+        //    document.getElementById("projectPanel").style.visibility = 'visible';
+        //    document.getElementById("testPanel").hidden = 'hidden';
+        //    CK();
+        //}
+        //else {
+        //    if (document.getElementById("dropdownListExamType").value <= 0 || document.getElementById("dropdownListCategory").value <= 0) {
+        //        Bilgilendirme('Lütfen öncelikle konu ve soru tipini seçiniz.', 'error');
+        //    }
+        //    document.getElementById("projectPanel").style.visibility = 'hidden';
+        //    document.getElementById("testPanel").style.visibility = 'hidden';
+        //    document.getElementById("mainPanel").hidden = 'hidden';
+        //}
+        CK();
+    }
+</script>
+@if (ViewBag.Message == true)
+{
+    if (ViewBag.Update == true)
+    {
+        <script type="text/javascript">
+            Bilgilendirme('Güncelleme başarıyla gerçekleştirildi. Birazdan sorular sayfasına yönlendirileceksiniz', 'info')
+            var url = '@Url.Action("Index", "Question")';
+            setTimeout(function () { window.location.href = url; }, 3000)
+        </script>
+    }
+    else
+    {
+        <script type="text/javascript">
+            Bilgilendirme('Soru başarıyla eklendi.', 'success')
+            setTimeout(function () { Bilgilendirme('Konuyu seçtikten sonra, yeni soru ekleyebilirsiniz..', 'info'); }, 3000)
+            $(document).ready(function () { Clear() });
+        </script>
+    }
+}
+else if (ViewBag.Message == false)
+{
+    <script type="text/javascript">
+        Bilgilendirme('Bir hata oluştu', 'error')
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        setTimeout(function () { Bilgilendirme('İlk olarak konu seçiniz..', 'info'); }, 2000)
+    </script>
+}
+
+
+@using (Ajax.BeginForm("Add", "Question", FormMethod.Post, null))
+{
+
+    <section class="content_section">
+
+        <div class="content row_spacer clearfix">
+            <div class="hm-tabs tabs1">
+
+                <ul class="tabs-body">
+                    <li data-content="inbox" class="selected">
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.IsUpdate)
+                        <div class="form_row clearfix">
+                            <div class="my_col_half">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                            KONU
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                                @Html.DropDownListFor(x => x.SubjectID, Model.SubjectList, "Seçiniz", new { @class = "dropdown", @id = "dropdownListCategory" })
+                            </div>
+                            @*<div class="my_col_third">
+                                    <label for="birthday_day">
+                                        <span class="hm_field_name">
+                                            <b>
+                                                SORU TİPİ
+                                            </b>
+                                        </span>
+                                        <span class="hm_requires_star"></span>
+                                    </label>
+                                    @Html.DropDownListFor(x => x.Type, Model.QuestionType, new { @class = "dropdown", @id = "dropdownListExamType" })
+                                </div>*@
+                            <div class="my_col_half">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star">*</span>
+                                </label>
+                                <a onclick="PanelAc();" class="btn_a medium_btn bottom_space col-md-offset-3 target=" _self" href="#">
+                                    <span><i class="in_left ico-arrow-right2"></i><span>Devam Et</span><i class="in_right ico-arrow-right2"></i></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="mainPanel" style="visibility:hidden">
+                            <div class="form_row clearfix">
+                                <div class="my_col_full">
+                                    <div class="main_title upper small">
+                                        <h2><span class="line"><span class="dot"></span></span><B style="font-family:Arial">SORU İÇERİĞİ</B></h2>
+                                    </div>
+                                    @Html.TextAreaFor(x => x.Content, new { @class = "ckeditor", @id = "CkPublic", @style = "height:350px", })
+                                    @Html.ValidationMessageFor(model => model.Content)
+
+                                </div>
+
+                                <div class="my_col_full">
+                                    @*<div id="projectPanel">
+                                            <br />
+                                            <br />
+                                            <input type="submit" class="btn btn-danger pull-right" name="btnKayit" value="Kaydet" />
+                                        </div>*@
+                                    <div id="testPanel">
+                                        <div class="col-md-12">
+                                            <div class="main_title upper small">
+                                                <h2><span class="line"><span class="dot"></span></span><B style="font-family:Arial">CEVAPLAR</B></h2>
+                                            </div>
+
+                                            <!-- My Accordion -->
+                                            <div class="enar_accordion plus_minus" data-type="accordion">
+                                                <!-- accordion - toggle -->
+                                                <div class="enar_occ_container occ_expanded" data-expanded="true">
+                                                    <span class="enar_occ_title">CEVAP-A</span>
+                                                    <div class="enar_occ_content">
+                                                        <div class="acc_content">
+                                                            @Html.TextAreaFor(x => x.A, new { @class = "ckeditor", @id = "AreaA", @style = "height:350px" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="enar_occ_container" data-expanded="false">
+                                                    <span class="enar_occ_title">CEVAP-B</span>
+                                                    <div class="enar_occ_content">
+                                                        <div class="acc_content">
+                                                            @Html.TextAreaFor(x => x.B, new { @class = "ckeditor", @id = "AreaB", @style = "height:350px" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="enar_occ_container" data-expanded="false">
+                                                    <span class="enar_occ_title">CEVAP-C</span>
+                                                    <div class="enar_occ_content">
+                                                        <div class="acc_content">
+                                                            @Html.TextAreaFor(x => x.C, new { @class = "ckeditor", @id = "AreaC", @style = "height:350px" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="enar_occ_container" data-expanded="false">
+                                                    <span class="enar_occ_title">CEVAP-D</span>
+                                                    <div class="enar_occ_content">
+                                                        <div class="acc_content">
+                                                            @Html.TextAreaFor(x => x.D, new { @class = "ckeditor", @id = "AreaD", @style = "height:350px" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="enar_occ_container" data-expanded="false">
+                                                    <span class="enar_occ_title">CEVAP-E</span>
+                                                    <div class="enar_occ_content">
+                                                        <div class="acc_content">
+                                                            @Html.TextAreaFor(x => x.E, new { @class = "ckeditor", @id = "AreaE", @style = "height:350px" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+                                            <h4>DOĞRU CEVAP</h4>
+                                            @Html.DropDownListFor(x => x.RightAnswer, Model.AnswerDropDown, new { @class = "dropdown", @id = "dropDownListRightAnswer" })
+                                            <br />
+                                            @Html.ValidationMessageFor(model => model.RightAnswer)
+                                            <br />
+                                            <br />
+                                            <input type="submit" class="btn btn-danger pull-right" name="btnKayit" value="Kaydet" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+}

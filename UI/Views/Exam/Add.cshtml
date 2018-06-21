@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "Sınav Oluştur";
+    ViewBag.UstBaslik = "Sınav Oluştur";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+@using DAL.Data
+@model Exam
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+<script src="~/Assets/js/jquery-1.4.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sad').datepicker();
+        document.getElementById("sad").datepicker();
+    });
+
+    var htmlText = "";
+
+    function PanelAc() {
+        var count = $("#subject input[type=checkbox]").length;
+        htmlText = "";
+        var checked = []
+        var checkedText = []
+        $("input[type=checkbox]:checked").each(function () {
+            checked.push($(this).attr('id'));
+            checkedText.push($(this).val());
+        });
+
+        htmlText = "<p id='pElement' style='margin-left:20px;' class='hm_field_name' for='birthday_day'>Soru Sayısı Giriniz</p>";
+        for (var i = 0; i < checked.length; i++) {
+            htmlText += "<div class='my_col_third'><input required='required' name=" + checked[i] + " type='number' min='1' style='height:35px; width:80%;border-radius:5px;' id='" + checked[i] + "' placeholder='" + checkedText[i] + "' /></div>";
+        }
+
+        $("#checkBoxResult .a").html(htmlText);
+        $("#checkBoxResult").show();
+        document.getElementById("openPanel").style.visibility = "visible";
+        document.getElementById("openPanel").hidden = '';
+        document.getElementById("hr").style.visibility = "visible";
+        document.getElementById("hr").hidden = '';
+        document.getElementById("hr1").style.visibility = "visible";
+        document.getElementById("hr1").hidden = '';
+
+        if (checked.length == 0) {
+            htmlText = 'pElement';
+            document.getElementById("openPanel").style.visibility = "hidden";
+            document.getElementById("openPanel").hidden = 'hidden';
+            document.getElementById("hr").style.visibility = "hidden";
+            document.getElementById("hr").hidden = 'hidden';
+            document.getElementById("hr1").style.visibility = "hidden";
+            document.getElementById("hr1").hidden = 'hidden';
+            document.getElementById("pElement").style.visibility = "hidden";
+            document.getElementById("pElement").hidden = 'hidden';
+        }
+    }
+</script>
+
+
+
+@if (TempData["message"] != null && (bool)TempData["message"] == false)
+{
+    <script type="text/javascript">
+
+        Bilgilendirme('Seçtiğiniz konularda yeterli miktarda soru yoktur.', 'error')
+        var url = '@Url.Action("Add", "Exam")';
+        setTimeout(function () { window.location.href = url; }, 3000)
+    </script>
+}
+else if (TempData["message"] != null && (bool)TempData["message"] == true)
+{
+    <script type="text/javascript">
+        Bilgilendirme('Sınav başarı ile kaydedildi...', 'access')
+        var url = '@Url.Action("Add", "Exam")';
+    </script>
+}
+else if (TempData["msg"] != null)
+{
+    string result = TempData["msg"] as string;
+
+    <script type="text/javascript">
+        Info('@result', 'error')
+        var url = '@Url.Action("Add", "Exam")';
+    </script>
+}
+
+@if (TempData["msg1"] != null)
+{
+    string result = TempData["msg1"] as string;
+
+    <script type="text/javascript">
+        Info('@result', 'error')
+        var url = '@Url.Action("Add", "Exam")';
+    </script>
+}
+<section class="content_section">
+    <div class="content row_spacer clearfix">
+        <div class="hm-tabs tabs1">
+            <ul class="tabs-body">
+                <li data-content="inbox" class="selected">
+                    <div class="form_row clearfix">
+                    </div>
+                    @using (Html.BeginForm("Add", "Exam", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div id="mainPanel">
+                            <div class="form_row clearfix">
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="input-append">
+                                        <label for="birthday_day">
+                                            <span class="hm_field_name">
+                                                <b>
+                                                    SINAV ADI
+                                                </b>
+                                            </span>
+                                            <span class="hm_requires_star">*</span>
+                                        </label>
+                                        <select required id="dropdownListExamName" class="dropdown" name="examName" style="height:35px; width:80%; margin-left:60px; border-color:ActiveCaption; border-radius:5px;">
+                                            <option style="color:grey" value="" disabled selected>Seçiniz</option>
+                                            <option style="color:grey" id="1.sinav" value="1.Sınav">1.Sınav</option>
+                                            <option style="color:grey" id="2.sinav" value="2.Sınav">2.Sınav</option>
+                                            <option style="color:grey" id="3.sinav" value="3.Sınav">3.Sınav</option>
+                                            <option style="color:grey" id="4.sinav" value="4.Sınav">4.Sınav</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <hr style="margin-top:30px;" />
+                                <div class="panel-body">
+                                    <div class="col-lg-9 col-sm-9" id="subject">
+
+                                        @foreach (Subject item in TempData["subject"] as List<Subject>)
+                                        {
+                                            <label style="width:180px;">
+                                                @Html.CheckBox("subject", false, new { @class = "", id = item.Id, value = item.Name }) @item.Name
+                                            </label>
+                                        }
+                                    </div>
+                                    <div class="col-lg-3 col-sm-3 pull-right" style="margin-top:100px;">
+                                        <label for="birthday_day">
+                                            <span class="hm_field_name">
+                                                <b>
+                                                </b>
+                                            </span>
+                                        </label>
+                                        <a class="btn_a small_btn bottom_space col-md-offset-3" href="javascript:PanelAc();">
+                                            <span><i class="in_left ico-arrow-right2"></i><span>Devam Et</span><i class="in_right ico-arrow-right2"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr id="hr1" hidden="hidden" />
+                                <div class="panel-body" id="checkBoxResult">
+                                    <div class="form_row a">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr id="hr" hidden="hidden" />
+                            <div class="panel-body collapse in" id="openPanel" hidden="hidden">
+                                <div class="form_row clearfix">
+                                    @*<div class="my_col_third">
+                                        <span class="hm_field_name">
+                                            <b>
+                                                SINAV TİPİ
+                                            </b>
+                                        </span>
+                                        <br />
+                                        <select required id="dropdownListExamType" class="" name="examType" style="height:35px; border-color:ActiveCaption">
+                                            <option style="color:grey" disabled selected value="">Seçiniz</option>
+                                            <option style="color:grey" id="test" value="1">Test</option>
+                                            <option style="color:grey" id="proje" value="2">Proje</option>
+                                        </select>
+                                    </div>*@
+                                    <div class="my_col_third">
+                                        <span class="hm_field_name">
+                                            <b>
+                                                SINIF
+                                            </b>
+                                        </span>
+                                        <br />
+                                        <select id="dropDownListClassroom" class="dropdown" name="classroomName" required style="height:35px; border-color:ActiveCaption; border-radius:5px; ">
+                                            <option style="color:grey" disabled selected value="">Seçiniz</option>
+                                            @foreach (Classroom item in TempData["classroom"] as IEnumerable<Classroom>)
+                                            {
+                                                <option style="color:grey;" id="@item.Id">@item.Name</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                    <div class="my_col_third">
+                                        <span class="hm_field_name">
+                                            <b>
+                                                TARİHİ
+                                            </b>
+                                        </span>
+                                        <div id="datetimepicker2" class="input-append">
+                                            @Html.TextBoxFor(m => m.ExamDate, new { id = "birth-date", type = "date", @style = "height: 35px; width: 80%; border-color:ActiveCaption;border-radius:5px;", required = "required" })
+                                            <span class="date" style="height:35px; width:40px;">
+                                                <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                                </i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_row clearfix">
+                                    <div class="my_col_third">
+                                        <span class="hm_field_name">
+                                            <b>
+                                                BAŞLANGIÇ SAATİ
+                                            </b>
+                                        </span>
+                                        <br />
+                                        @Html.TextBoxFor(m => m.ExamStartTime, new { type = "time", @style = "height:35px; width:80%; border-color:ActiveCaption;border-radius:5px;", @id = "ExamStartTime", required = "required" })
+                                    </div>
+                                    <div class="my_col_third">
+                                        <span class="hm_field_name">
+                                            <b>
+                                                BİTİŞ SAATİ
+                                            </b>
+                                        </span>
+                                        <div class="input-append">
+                                            @Html.TextBoxFor(m => m.ExamEndTime, new { style = "height: 35px;width:83%; border-color:ActiveCaption;border-radius:5px;", required = "required", type="time" })
+                                        </div>
+                                    </div>
+                                    <div class="my_col_third">
+                                        <div class="input-append">
+                                            <button type="submit" class="btn btn-danger btn-block" style="height:35px; margin-top:22px; border-radius:5px;">
+                                                Sınav Oluştur
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+

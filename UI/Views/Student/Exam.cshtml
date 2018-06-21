@@ -1,0 +1,276 @@
+﻿@using UI.Models.DTO
+@model IEnumerable<QuestionDTOVM>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" href="//resources/demos/style.css" />
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/wizard/js/jquery-2.0.0.min.js"></script>
+    <script src="~/Assets/wizard/js/jquery-ui.js"></script>
+    <link href="~/Assets/wizard/styles/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Assets/wizard/js/jquery.smartWizard.js"></script>
+    <link href="~/Assets/wizard/styles/smart_wizard.css" rel="stylesheet" />
+    <link href="~/Assets/wizard/styles/demo_style.css" rel="stylesheet" />
+    <link href="~/Assets/css/selectable.css" rel="stylesheet" />
+    <link href="~/Assets/css/custom.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $(".accord").accordion({
+                collapsible: true
+            });
+        });
+        $(function () {
+            $("#selectable").selectable();
+        });
+        $(function () {
+            $("#selectable2").selectable();
+        });
+        @*$(function () {
+            var timeOut = function () {
+                alert("Geldi mi");
+                @Html.Action("Result", "Student");
+            }
+            setTimeout(timeOut, 60000);*@
+        //})
+        $(document).ready(function () {
+            //  Wizard 1
+            $('#wizard1').smartWizard({
+                transitionEffect: 'fade',
+                onFinish: onFinishCallback,
+                onLeaveStep: leaveAStepCallback,
+            });
+            function leaveAStepCallback(obj, context) {
+                // To check and enable finish button if needed
+                if (context.fromStep >= 2) {
+                    $('#wizard1').smartWizard('enableFinish', true);
+                }
+                return true;
+            }
+            //  Wizard 2
+            $('#wizard2').smartWizard({ transitionEffect: 'slide', onFinish: onFinishCallback });
+            function onFinishCallback() {
+                alert('Finish Called');
+            }
+        });
+    </script>
+    <script>
+        window.onload = function () {
+            getDate();
+        }
+        function getDate() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/Student/GetTime",
+                success: function (data) {
+
+                    var timer;
+                    timer = setInterval(function () {
+                        if (data.Hours <= 0 && data.Minute <= 0 && data.Second == 1) {
+                            clearInterval(timer);
+                            alert("Gel Bakalım");
+                            var url = '@Url.Action("SaveExam", "Student")';
+                            setTimeout(function () { window.location.href = url; }, 2000)
+                            var stat = '@ViewBag.Finish';
+                            if (stat == true) {
+                                setTimeout(function () { window.location.href = url; }, 2000)
+                            }
+                        }
+                        else {
+                            data.Second -= 1;
+                            if (data.Second <= 0) {
+                                data.Minute -= 1;
+                                data.Second = 59;
+
+                            }
+                            else if (data.Minute < 0) {
+                                data.Hours -= 1;
+                                data.Minute = 59;
+                                data.Second = 59;
+                            }
+                            var url = '@Url.Action("Yonlendir", "Student")';
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "/Student/RedirectResult",
+                                success: function (data) {
+
+                                    if (data == true) {
+                                        window.location.href = url;
+                                    }
+                                }
+                            })
+
+                            lblSure.innerText = data.Hours + ":" + data.Minute + ":" + data.Second + "  ";
+                            $('#lblSure').html(data.Hours + ":" + data.Minute + ":" + data.Second + "  ");
+                        }
+                    }, 1000);
+                }
+            })
+        }
+
+        //function preventBack() { window.history.forward(); }
+        //setTimeout("preventBack()", 0);
+        //window.onunload = function () { null };
+    </script>
+
+</head>
+<body>
+    <div>
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="~/Assets/newassets/assets/images/bakampus-logo.png" /></a>
+            <label id="examTime">
+                Kalan Süre: <span id="lblSure"></span>
+            </label>
+
+        </div>
+    </div>
+    <div class="exam-heading">
+        <div class="container">
+            <h2 style="color:#ffffff; font-size:20px;padding-left:95px; margin-top:16px;">@TempData["ExamName"]</h2>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("SaveExam", "Student", FormMethod.Get, new { id = "form" }))
+    {
+        <table align="center" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>
+                    @*<h2>Bilge Adam Sınav Sistemi</h2>*@
+                    @*<img src="~/Assets/images/yenilogo.png" id="baLogo" />
+                        <label id="examTime">
+                            Kalan Süre: <span id="lblSure"></span>
+                        </label>
+                        <br />*@
+                    <div id="wizard1" class="swMain">
+                        @{
+                            int count = 1;
+                            int count1 = 1;
+                            int count2 = 0;
+                        }
+                        <ul>
+                            @foreach (QuestionDTOVM item in Model)
+                            {
+                                count2++;
+                                <li>
+                                    <a href="#@item.Id">
+                                        <label class="stepNumber">@count2</label>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        @foreach (QuestionDTOVM item in Model)
+                        {
+                            <div id="@item.Id" class="question">
+                                <h2 class="StepTitle">Soru @count</h2>
+                                <div class="conten-answer">
+                                    @Html.Raw(item.Content)
+                                </div>
+                                @*<a href="#" class="openClose" data-toggle="collapse">Hepsini Aç</a>*@
+                                <div class="accord ustAlt">
+                                    <h3>Cevap A</h3>
+                                    <div class="answer">
+                                        @Html.Raw(item.A)
+                                    </div>
+                                    <h3>Cevap B</h3>
+                                    <div class="answer">
+                                        @Html.Raw(item.B)
+                                    </div>
+                                    <h3>Cevap C</h3>
+                                    <div class="answer">
+                                        @Html.Raw(item.C)
+                                    </div>
+                                    <h3>Cevap D</h3>
+                                    <div class="answer">
+                                        @Html.Raw(item.D)
+                                    </div>
+                                    <h3>Cevap E</h3>
+                                    <div class="answer">
+                                        @Html.Raw(item.E)
+                                    </div>
+                                </div>
+                                @*<p class="aciklama">Aşağıdaki Şıklardan Doğru Seçeneği İşaretleyiniz?</p>*@
+                                <div class="mfp-close-btn-in answer-button" data-toggle="buttons">
+                                    <p class="select-answer">Cevap Seç:</p>
+                                    <label class="btn btn-warning option"><input type="radio" value="A" name="options" id="option-@count1" autocomplete="off" />A</label>
+                                    @{
+                                        count1++;
+                                    }
+                                    <label class="btn btn-warning option"><input type="radio" name="options" id="option-@count1" autocomplete="off" />B</label>
+                                    @{
+                                        count1++;
+                                    }
+                                    <label class="btn btn-warning option"><input type="radio" name="options" id="option-@count1" autocomplete="off" />C</label>
+                                    @{
+                                        count1++;
+                                    }
+                                    <label class="btn btn-warning option"><input type="radio" name="options" id="option-@count1" autocomplete="off" />D</label>
+                                    @{
+                                        count1++;
+                                    }
+                                    <label class="btn btn-warning option"><input type="radio" name="options" id="option-@count1" autocomplete="off" />E</label>
+                                    @{
+                                        count1++;
+                                        count++;
+                                    }
+                                </div>
+                            </div>
+                                        }
+                    </div>
+                </td>
+            </tr>
+        </table>
+                                        }
+
+    <script>
+
+        //Şıklara basıldığında öğrencinin verdiği cevabı listeye ekler.
+        $('.option').click(function () {
+            var result =  @Session["UserID"] + '.' + $(this).parents('.question').attr('id') + '-' + $(this).text();
+            //alert(result);
+            $.ajax({
+                url: '/Student/AddAnswer',
+                data: { answer: result },
+                dataType: 'json',
+                success: function (response) {
+                    alert(result);
+                }
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#buttonSubmit').click(function () {
+                var answer = confirm("Sınavı bitirmek istediğine emin misiniz? ");
+                //var r = confirm("Sınavı bitirmek istediğine emin misiniz? ");
+                if (answer == true) {
+                    $('#form').submit();
+                }
+            });
+        });
+
+        //Sınav bitirildiğinde sonuç sayfasına aktarma işlemi yapar.
+        @*function examFinish() {
+            var txt;
+            var r = confirm("Sınavı bitirmek istediğine emin misiniz? ");
+            if (r == true) {
+                var url = '@Url.Action("Result", "Student")';
+                window.location.href = url;
+            }
+            else {
+
+            }
+        }*@
+
+        //Sınav esnasında şıklar işaretlendiğinde şıkların arkaplan rengini değiştirir.
+        //$('.option').click(function () {
+        //    $('.option').css('background-color', '');
+        //    $(this).css("background-color", "#de5e5e");
+        //})
+    </script>
+</body>
+</html>

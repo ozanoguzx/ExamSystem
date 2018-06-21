@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Sınav Listesi";
+    ViewBag.UstBaslik = "Sınav Listesi";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+@using DAL.Data
+@model List<Exam>
+<script src="~/Assets/js/bootstrap.min.js"></script>
+<script src="~/Assets/js/jquery-1.4.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>
+@if (TempData["IsDelete"] != null && (bool)TempData["IsDelete"] == true)
+{
+    <script type="text/javascript">
+        Bilgilendirme('Sınav olan öğrencinin kaydını silemezsiniz', 'error');
+    </script>
+}
+<section class="content_section">
+    <div class="content row_spacer clearfix">
+        <div class="hm-tabs tabs1">
+            <ul class="tabs-body">
+                <li data-content="inbox" class="selected">
+                    @using (Html.BeginForm("Examlist", "Exam", FormMethod.Post))
+                    {
+                        <div class="form_row clearfix">
+                            <div class="my_col_third ">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                            Sınıf
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                                <select id="dropDownListSubject" class="dropdown" name="classroom" style="height:35px; width:350px;">
+                                    <option>Seçiniz</option>
+                                    @foreach (Classroom item in ViewBag.Classroom)
+                                    {
+                                        <option id="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="my_col_third ">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                            Durum
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                                <select id="dropDownListSubject" class="dropdown" name="state" style="height:35px; width:350px;">
+                                    <option value="0">Seçiniz</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="2">Pasif</option>
+                                </select>
+                            </div>
+
+                            <div class="my_col_third" style="top:35px;">
+                                <label for="birthday_day">
+                                    <span class="hm_field_name">
+                                        <b>
+                                        </b>
+                                    </span>
+                                    <span class="hm_requires_star"></span>
+                                </label>
+                                <button type="submit" class="btn_a medium_btn bottom_space" target="_self" href="#">
+                                    <span><i class="in_left ico-arrow-right2"></i><span>Filtrele</span><i class="in_right ico-arrow-right2"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    <div class="form_row clearfix">
+                        <table class="table table-bordered table-striped table-responsive table-hover">
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Sınav Adı</th>
+                                    <th scope="col">Sınav Konuları</th>
+                                    <th scope="col">Ekleyen</th>
+                                    <th scope="col">Sınıf</th>
+                                    <th scope="col">Tarih</th>
+                                    @*<th scope="col">Sınav Tipi</th>*@
+                                    <th scope="col">Sınav Durumu</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (Exam item in Model)
+                                {
+                                    string subjectsName = "";
+                                    foreach (Subject s in item.Subjects)
+                                    {
+                                        subjectsName += s.Name + ", ";
+                                    }
+                                    if (subjectsName != null && subjectsName != "")
+                                    {
+                                        subjectsName = subjectsName.Substring(0, subjectsName.Length - 2);
+                                    }
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>
+                                            <label data-toggle="tooltip" data-placement="top" title="@subjectsName" class="" style="font-size:15px; font-family:sans-serif;">
+                                                Konular
+                                            </label>
+
+                                        </td>
+                                        <td>
+                                            @{
+                                                BasExamContext context = new BasExamContext();
+                                                Classroom classroom = new Classroom();
+                                                classroom = context.Classrooms.Find(item.ClassroomID);
+                                                Trainer tr = new Trainer();
+                                                tr = context.Trainers.Find(item.TrainerID);
+                                            }
+                                            @tr.FirstName.ToString() @tr.LastName.ToString()
+                                        </td>
+                                        <td>@classroom.Name</td>
+                                        <td>@item.ExamDate.Value.ToShortDateString()</td>
+                                        @if (item.State == true)
+                                        {
+                                            <td>
+                                                <label data-toggle="tooltip" data-placement="top" title="Bu sınav aktif olup sonuçlanmamıştır." class="label label-danger col-md-offset-6 exam-aktif" style=" margin-left: 35px; margin-top: 8px; border: initial; background-color: #1ea418; padding: 15px; border-radius: 15px;">
+                                                </label>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <label data-toggle="tooltip" data-placement="top" title="Bu sınav pasif olup sonuçlanmıştır" class="label label-danger exam-pasif">
+
+                                                </label>
+                                            </td>
+                                        }
+                                        @if (item.State == true)
+                                        {
+                                            <td>
+                                                <a href="/Exam/Delete/@item.Id" onclick="return confirm('Silmek istediğinize emin misiniz?')" class="btn btn-danger">Sil</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        @if (item.State == true)
+                                        {
+                                            <td>
+                                                <a href="/Exam/Passive/@item.Id" onclick="return confirm('Sınavı bitirmek istediğinize emin misiniz?')" class="btn btn-warning">Sınavı Bitir</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                    </tr>
+                                      }
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+            <div class="highlight">
+                <span id="İcerik_LabelSayi"><span class="label label-info"><strong>@Model.Count</strong></span> adet sınav listeleniyor... </span>
+            </div>
+        </div>
+    </div>
+    @* -------------Modal Start--------- *@
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel">Sınavı Silmek itediğinize emin misiniz?</h2>
+                </div>
+                <div class="modal-body">
+                    @*<td>@Html.ActionLink("Sil", "Delete", "Exam", new { item.Id }, new { @class = "delete btn btn-danger" })</td>*@
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">iptal</button>
+                    <button type="button" class="delete btn btn-primary">Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* -------------Modal End--------- *@
+</section>
+
+<script type="text/javascript">
+
+    $('.delete').live('click', function () {
+
+        var id = $(this).attr('id');
+        veri_sil(id);
+    });
+
+    function veri_sil(veri_id) {
+        $.ajax({
+            type: 'POST',
+            url: '/Exam/Delete/' + veri_id,
+            data: ''
+        })
+    }
+
+    $('.passive').live('click', function () {
+        var id = $(this).attr('id');
+        dataPassive(id);
+    });
+    function dataPassive(data_id) {
+        $.ajax({
+            type: 'POST',
+            url: '/Exam/Passive/' + data_id,
+            data: ''
+        })
+    }
+</script>
