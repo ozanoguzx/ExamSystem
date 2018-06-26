@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Eğitmenler";
+    ViewBag.UstBaslik = "Eğitmenler";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+@using UI.Models
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<DAL.Data.Trainer>
+
+<script>
+    $("[name='my-checkbox']").bootstrapSwitch();
+</script>
+
+<section class="content_section">
+    <div class="content_spacer">
+        <div class="content">
+            <div class="table_container table-responsive">
+                <div>
+
+                    <div class="centered">
+                    </div>
+                    <table class="table table-bordered table-striped table-responsive table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Ad</th>
+                                <th scope="col">Soyad</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">İşlem</th>
+                                <th></th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+
+                                    <td>@item.LastName</td>
+                                    
+                                    <td>@item.EMail</td>
+                                    <td><a onclick="return confirm('İşlemi yapmak istediğnize emin misiniz?');" id="" title="Sil" href="Delete/@item.Id" style="color:Red;">Sil</a></td>
+                                    <td><a id="" title="Düzenle" href="Update/@item.Id">Güncelle</a></td>
+                                </tr>
+                                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight">
+                <span id="İcerik_LabelSayi"><span class="label label-info"><strong>@ViewBag.TrainerCount</strong></span> adet eğitmen var...</span>
+            </div>
+
+            <div class="pagedList">
+                @Html.PagedListPager(Model, sayfa => Url.Action("TrainerList", new { sayfa }), PagedListRenderOptions.PageNumbersOnly)
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="col-sm-6 col-lg-4">
+    <p>
+        <input id="switch-state" type="checkbox" checked>
+    </p>
+</div>

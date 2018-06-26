@@ -1485,6 +1485,7 @@
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminStudentController.cs" />
+    <Compile Include="Controllers\AdminTrainerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
@@ -1503,6 +1504,7 @@
     <Compile Include="Models\QuestionVM.cs" />
     <Compile Include="Models\RoleAttribute.cs" />
     <Compile Include="Models\StudentVM.cs" />
+    <Compile Include="Models\TrainerVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeController.cs" />
   </ItemGroup>
@@ -1564,6 +1566,9 @@
     <Content Include="Views\AdminStudent\StudentList.cshtml" />
     <Content Include="Views\AdminStudent\Add.cshtml" />
     <Content Include="Views\AdminStudent\Update.cshtml" />
+    <Content Include="Views\AdminTrainer\TrainerList.cshtml" />
+    <Content Include="Views\AdminTrainer\Add.cshtml" />
+    <Content Include="Views\AdminTrainer\Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

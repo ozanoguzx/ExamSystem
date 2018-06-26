@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Eğitmen Ekle";
+    ViewBag.UstBaslik = "Eğitmen Ekle";
+    Layout = "~/Views/Shared/_MasterPage.cshtml";
+}
+
+
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+@model UI.Models.TrainerVM
+
+<section class="content_section">
+    <div class="content row_spacer clearfix">
+        <div class="hm-tabs tabs1">
+            <ul class="tabs-body">
+                <li data-content="inbox" class="selected">
+                    <div class="form_row clearfix">
+                    </div>
+                    @using (Html.BeginForm("Update", "AdminTrainer", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div id="mainPanel">
+                            <div class="form_row clearfix">
+                                <hr style="margin-top:30px;" />
+                                <div class="panel-body">
+                                    <div class="col-lg-6 col-sm-6" id="student">
+                                        <label for="birthday_day">
+                                            <span class="hm_field_name">
+                                                <b>
+                                                    Ad
+                                                </b>
+                                            </span>
+                                            <span class="hm_requires_star">*</span>
+                                        </label>
+                                        <input style="border-color:grey" class="form-control" type="text" name="FirstName" value="@Model.FirstName" required />
+                                        <label for="birthday_day">
+                                            <span class="hm_field_name">
+                                                <b>
+                                                    Soyad
+                                                </b>
+                                            </span>
+                                            <span class="hm_requires_star">*</span>
+                                        </label>
+                                        <input style="border-color:grey" class="form-control" type="text" name="LastName" value="@Model.LastName" required />
+                                        <label for="birthday_day">
+                                            <span class="hm_field_name">
+                                                <b>
+                                                    Email
+                                                </b>
+                                            </span>
+                                        </label>
+                                        <input style="border-color:grey" class="form-control" type="text" name="Email" value="@Model.Email" />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="Id" value="@Model.ID" />
+                            <div class="panel-body collapse in" id="openPanel" hidden="hidden">
+                                <div class="form_row clearfix">
+                                    <div class="my_col_third">
+                                        <div class="input-append">
+                                            <button type="submit" class="btn btn-danger btn-block" style="height:35px; margin-top:22px; border-radius:5px;">
+                                                Eğitmen Kaydet
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
