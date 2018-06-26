@@ -1,5 +1,6 @@
 ﻿using BLL;
 using DAL.Data;
+using PagedList;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -380,5 +381,12 @@ namespace UI.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+
+
+    
+
+
+
     }
 }

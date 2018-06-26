@@ -1484,10 +1484,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminStudentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1500,6 +1502,7 @@
     <Compile Include="Models\ExamVM.cs" />
     <Compile Include="Models\QuestionVM.cs" />
     <Compile Include="Models\RoleAttribute.cs" />
+    <Compile Include="Models\StudentVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeController.cs" />
   </ItemGroup>
@@ -1558,6 +1561,9 @@
     <Content Include="Template\assets\images\.DS_Store" />
     <Content Include="Template\assets\js\.DS_Store" />
     <Content Include="Views\Shared\Layout.cshtml" />
+    <Content Include="Views\AdminStudent\StudentList.cshtml" />
+    <Content Include="Views\AdminStudent\Add.cshtml" />
+    <Content Include="Views\AdminStudent\Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1570,6 +1576,7 @@
     <Folder Include="Assets\files\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Service\" />
+    <Folder Include="Views\Trainer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

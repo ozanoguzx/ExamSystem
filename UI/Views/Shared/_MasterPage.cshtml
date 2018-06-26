@@ -164,13 +164,42 @@
                                                         <li class="normal_menu">@Html.ActionLink("Soru Ekle", "Add", "Question")</li>
                                                     </ul>
                                                 </li>
-
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Konular</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Konular", "Examlist", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Konu Ekle", "Add", "Exam")</li>
+                                                    </ul>
+                                                </li>
                                                 <li class="normal_menu">
                                                     <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Sınavlar</b></span></a>
                                                     <ul style="display: none; opacity: 1;">
                                                         <li class="normal_menu">@Html.ActionLink("Tüm Sınavlar", "Examlist", "Exam")</li>
                                                         <li class="normal_menu">@Html.ActionLink("Sınav Ekle", "Add", "Exam")</li>
                                                         <li class="normal_menu">@Html.ActionLink("Sınav Sonuçları", "ExamResult", "Exam")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Eğitmenler</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Eğitmenler", "Examlist", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Eğitmen Ekle", "Add", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Eğitmen Sil", "Add", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Eğitmen Güncelle", "Add", "Exam")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Sınıflar</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Sınıflar", "Examlist", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınıf Ekle", "Add", "Exam")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("StudentList","AdminStudent")"><span><b style="font-family:Arial">Öğrenciler</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Öğrenciler", "StudentList", "AdminStudent")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Öğrenci Ekle", "Add", "AdminStudent")</li>
                                                     </ul>
                                                 </li>
                                             </ul>
