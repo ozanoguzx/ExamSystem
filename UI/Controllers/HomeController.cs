@@ -199,7 +199,7 @@ namespace UI.Views
         public ActionResult Login(string email, string password)
         {
             trainer = tRepo.GetAll().Where(x => x.Username == email && x.Password == password).FirstOrDefault();
-            student = sRepo.GetAll().Where(x => x.Email == email && x.Password == password).FirstOrDefault();
+            student = sRepo.GetAll().Where(x => x.UserName == email && x.Password == password).FirstOrDefault();
             admin = tRepo.GetAll().Where(x => x.Username == email && x.Password == password && x.IsSuperAdmin==true).FirstOrDefault();
             if (admin != null)
             {
