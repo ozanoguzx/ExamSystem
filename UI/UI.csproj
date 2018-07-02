@@ -1115,7 +1115,6 @@
     <Content Include="Content\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Content\ckeditor\skins\moono\images\spinner.gif" />
     <Content Include="Content\ckeditor\styles.js" />
-    <Content Include="Content\ckfinder\bin-debug\CKFinder.dll" />
     <Content Include="Content\ckfinder\bin-debug\CKFinder.pdb" />
     <Content Include="Content\ckfinder\bin-debug\CKFinder_FileEditor.dll" />
     <Content Include="Content\ckfinder\bin-debug\CKFinder_FileEditor.pdb" />
@@ -1795,7 +1794,6 @@
     <Content Include="Assets\newassets\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\newassets\assets\images\.DS_Store" />
     <Content Include="Assets\newassets\assets\js\.DS_Store" />
-    <Fakes Include="Fakes\CKFinder.fakes" />
     <Content Include="CKFinderScripts\plugins\README.md" />
     <Content Include="CKFinderScripts\lang\zh-tw.json" />
     <Content Include="CKFinderScripts\lang\zh-cn.json" />
