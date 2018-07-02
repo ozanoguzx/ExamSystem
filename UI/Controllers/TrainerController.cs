@@ -7,7 +7,8 @@ using UI.Models;
 
 namespace UI.Controllers
 {
- 
+
+    [RolesAttribute(2)]
     public class TrainerController : Controller
     {
         // GET: Trainer

@@ -19,6 +19,7 @@ namespace UI.Views
         SubjectRepo subRepo = new SubjectRepo();
         Student student = new Student();
         Trainer trainer = new Trainer();
+        Trainer admin = new Trainer();
 
         public class ChartClass
         {
@@ -199,11 +200,11 @@ namespace UI.Views
         {
             trainer = tRepo.GetAll().Where(x => x.Username == email && x.Password == password).FirstOrDefault();
             student = sRepo.GetAll().Where(x => x.Email == email && x.Password == password).FirstOrDefault();
-
-            if (trainer != null)
+            admin = tRepo.GetAll().Where(x => x.Username == email && x.Password == password && x.IsSuperAdmin==true).FirstOrDefault();
+            if (admin != null)
             {
-                Session["UserID"] = trainer.Id;
-                Session["UserName"] = trainer.FullName;
+                Session["UserID"] = admin.Id;
+                Session["UserName"] = admin.FullName;
                 Session["UserType"] = 0;
                 return RedirectToAction("index", "Admin");
             }
@@ -213,6 +214,13 @@ namespace UI.Views
                 Session["UserName"] = student.FirstName + " " + student.LastName;
                 Session["UserType"] = 1;
                 return RedirectToAction("Index", "Student");
+            }
+            else if (trainer!=null)
+            {
+                Session["UserID"] = trainer.Id;
+                Session["UserName"] = trainer.FullName;
+                Session["UserType"] = 2;
+                return RedirectToAction("index", "Trainer");
             }
             else
             {

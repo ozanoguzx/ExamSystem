@@ -66,7 +66,6 @@ namespace UI.Controllers
             return RedirectToAction("StudentList","AdminStudent");
         }
 
-
         public ActionResult Add()
         {
             TempData["classroom"] = clsRepo.GetAll();
@@ -83,8 +82,8 @@ namespace UI.Controllers
             std.Email = data.Email;
             std.Classrooms.Add(clsRepo.GetById(data.ClassroomID));
             std.IsActive = true;
-            std.UserName = data.FirstName.Substring(0, 2) + "." + data.LastName;
-            std.Password = data.FirstName.Substring(0, 2) + "." + data.LastName + "123";
+            std.UserName = data.FirstName.Substring(0, 2).ToLower() + "." + data.LastName.ToLower();
+            std.Password = data.FirstName.Substring(0, 2).ToLower() + "." + data.LastName.ToLower() + "123";
             std.CreatedDate = DateTime.UtcNow;
             
             stdRepo.Add(std);

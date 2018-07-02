@@ -138,6 +138,7 @@
     <Content Include="Assets\css\dark.css" />
     <Content Include="Assets\css\flexslider.css" />
     <Content Include="Assets\css\icon-fonts.css" />
+    <Content Include="Assets\css\login.css" />
     <Content Include="Assets\css\magnific-popup.css" />
     <Content Include="Assets\css\mediaelementplayer.css" />
     <Content Include="Assets\css\Pagess.css" />
@@ -189,6 +190,7 @@
     <Content Include="Assets\images\bg3.jpg" />
     <Content Include="Assets\images\bg6.jpg" />
     <Content Include="Assets\images\bg_header5.html" />
+    <Content Include="Assets\images\Bilge Adam Akademi Logo RGB-01.png" />
     <Content Include="Assets\images\blank.gif" />
     <Content Include="Assets\images\camera_skins.png" />
     <Content Include="Assets\images\colorful4.png" />
@@ -236,9 +238,11 @@
     <Content Include="Assets\images\icons\shopping-bag.svg" />
     <Content Include="Assets\images\icons\ufo.svg" />
     <Content Include="Assets\images\icons\weather.png" />
+    <Content Include="Assets\images\loginiBG.jpg" />
     <Content Include="Assets\images\logo-big-dark.png" />
     <Content Include="Assets\images\logo-dark.png" />
     <Content Include="Assets\images\logo-light.png" />
+    <Content Include="Assets\images\logo_lg.png" />
     <Content Include="Assets\images\looking1.jpg" />
     <Content Include="Assets\images\m_d_arrow.png" />
     <Content Include="Assets\images\m_d_arrow_white.png" />
@@ -1486,16 +1490,19 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminStudentController.cs" />
     <Compile Include="Controllers\AdminTrainerController.cs" />
+    <Compile Include="Controllers\ClassroomController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
+    <Compile Include="Controllers\TrainerStudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HelperMetots.cs" />
     <Compile Include="Models\Average.cs" />
+    <Compile Include="Models\ClassroomVM.cs" />
     <Compile Include="Models\CustomHelpers.cs" />
     <Compile Include="Models\DTO\QuestionDTO.cs" />
     <Compile Include="Models\DTO\QuestionDTOVM.cs" />
@@ -1569,6 +1576,11 @@
     <Content Include="Views\AdminTrainer\TrainerList.cshtml" />
     <Content Include="Views\AdminTrainer\Add.cshtml" />
     <Content Include="Views\AdminTrainer\Update.cshtml" />
+    <Content Include="Views\Classroom\ClassroomList.cshtml" />
+    <Content Include="Views\Classroom\Add.cshtml" />
+    <Content Include="Views\Classroom\Update.cshtml" />
+    <Content Include="Views\Trainer\Index.cshtml" />
+    <Content Include="Views\TrainerStudent\StudentList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1581,7 +1593,6 @@
     <Folder Include="Assets\files\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Service\" />
-    <Folder Include="Views\Trainer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

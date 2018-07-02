@@ -11,7 +11,7 @@ namespace BLL
 {
     public class StudentRepo : IRepository<Student>
     {
-        BasExamContext context;
+        BasExamContext context = new BasExamContext();
         bool result = false;
 
         public bool Add(Student item)
@@ -74,11 +74,11 @@ namespace BLL
         public List<Student> GetAll()
         {
             List<Student> StudentList;
-            using (context = new BasExamContext())
-            {
-                StudentList = context.Students.ToList();
-            }
-
+            //using (context = new BasExamContext())
+            //{
+            //    
+            //}
+            StudentList = context.Students.ToList();
             return StudentList;
         }
         public Student GetById(int id)

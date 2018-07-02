@@ -48,8 +48,8 @@ namespace UI.Controllers
             trn.LastName = data.LastName;
             trn.EMail = data.Email;
             trn.IsActive = true;
-            trn.Username = data.FirstName.Substring(0, 2) + "." + data.LastName;
-            trn.Password = data.FirstName.Substring(0, 2) + "." + data.LastName + "123";
+            trn.Username = data.FirstName.Substring(0, 2).ToLower() + "." + data.LastName.ToLower();
+            trn.Password = data.FirstName.Substring(0, 2).ToLower() + "." + data.LastName.ToLower() + "123";
             trn.FullName = data.FirstName + " " + data.LastName;
             trn.CreatedDate = DateTime.UtcNow;
 

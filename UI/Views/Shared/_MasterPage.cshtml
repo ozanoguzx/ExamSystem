@@ -105,16 +105,23 @@
                             if (Session["UserType"] != null)
                             {
                                 int type = Convert.ToInt32(Session["UserType"]);
-                                if (type > 0)
+                                if (type == 1)
                                 {
                                     <a href="@Url.Action("Index", "Student")">
                                         <img class="logo_dark" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
                                         <img class="logo_light" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
                                     </a>
                                 }
-                                else
+                                else if(type==0)
                                 {
                                     <a href="@Url.Action("Index","Admin")">
+                                        <img class="logo_dark" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
+                                        <img class="logo_light" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
+                                    </a>
+                                }
+                                else if (type == 2)
+                                {
+                                    <a href="@Url.Action("Index","Trainer")">
                                         <img class="logo_dark" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
                                         <img class="logo_light" style="bottom:40px" src="~/Assets/images/yenilogo.png" alt="BAlogo">
                                     </a>
@@ -127,7 +134,7 @@
                         if (Session["UserType"] != null)
                         {
                             int type = Convert.ToInt32(Session["UserType"]);
-                            if (type > 0)
+                            if (type ==1)
                             {
                                 <div ID="PanelStudent">
                                     <nav id="main_nav">
@@ -148,7 +155,7 @@
                                     </nav>
                                 </div>
                             }
-                            else
+                            else if(type==0)
                             {
                                 <div ID="PanelSuperAdmin">
                                     <nav id="main_nav">
@@ -187,10 +194,10 @@
                                                     </ul>
                                                 </li>
                                                 <li class="normal_menu">
-                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Sınıflar</b></span></a>
+                                                    <a style="font-size:small" href="@Url.Action("Classroomlist","Classroom")"><span><b style="font-family:Arial">Sınıflar</b></span></a>
                                                     <ul style="display: none; opacity: 1;">
-                                                        <li class="normal_menu">@Html.ActionLink("Tüm Sınıflar", "Examlist", "Exam")</li>
-                                                        <li class="normal_menu">@Html.ActionLink("Sınıf Ekle", "Add", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Sınıflar", "Classroomlist", "Classroom")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınıf Ekle", "Add", "Classroom")</li>
                                                     </ul>
                                                 </li>
                                                 <li class="normal_menu">
@@ -205,8 +212,59 @@
                                     </nav>
                                 </div>
                             }
+                            else if (type == 2)
+                            {
+                                <div ID="PanelSuperAdmin">
+                                    <nav id="main_nav">
+                                        <div id="nav_menu">
+                                            <span class="mobile_menu_trigger">
+                                                <a href="#" class="nav_trigger">Menu<span></span></a>
+                                            </span>
+                                            <ul id="navy" class="clearfix">
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Index","Question")"><span><b style="font-family:Arial">Sorular</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Sorular", "Index", "Question")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Soru Ekle", "Add", "Question")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Konular</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Konular", "Examlist", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Konu Ekle", "Add", "Exam")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Examlist","Exam")"><span><b style="font-family:Arial">Sınavlar</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Sınavlar", "Examlist", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınav Ekle", "Add", "Exam")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınav Sonuçları", "ExamResult", "Exam")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("Classroomlist","Classroom")"><span><b style="font-family:Arial">Sınıflar</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Sınıflar", "Classroomlist", "Classroom")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Sınıf Ekle", "Add", "Classroom")</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="normal_menu">
+                                                    <a style="font-size:small" href="@Url.Action("StudentList","TrainerStudent")"><span><b style="font-family:Arial">Öğrenciler</b></span></a>
+                                                    <ul style="display: none; opacity: 1;">
+                                                        <li class="normal_menu">@Html.ActionLink("Tüm Öğrenciler", "StudentList", "TrainerStudent")</li>
+                                                        <li class="normal_menu">@Html.ActionLink("Öğrenci Ekle", "Add", "TrainerStudent")</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            }
                         }
                     }
+                    
                     <div class="clear"></div>
                 </div>
             </div>
