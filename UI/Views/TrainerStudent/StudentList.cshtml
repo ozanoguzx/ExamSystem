@@ -17,17 +17,17 @@
             url : "/TrainerStudent/StudentsByClassroom/"+classRoomID,
             type: 'GET',
             success: function (data) {
-                alert(data[0].FirstName)
-                $("table tbody tr").remove();
-                var count = Object.keys(data).length;
-                if (count > 0) {
-                    $.each(data, function (key, item) {
-                        $("#studentTable tbody").append(`<tr><td style='line-height:40px;'>
-                                    ${item.FirstName} </td><td style='line-height:40px;'>
-                                    ${item.LastName} </td><td  style='line-height:40px;>
-                                    ${item.Email} </td><td  style='line-height:40px;><a href='ExamResults/${item.Id}'>Sınav Sonuçlarını İncele</a> </td></tr>`)
-                    });
-                }
+                //alert(data[0].FirstName)
+                //$("table tbody tr").remove();
+                //var count = Object.keys(data).length;
+                //if (count > 0) {
+                //    $.each(data, function (key, item) {
+                //        $("#studentTable tbody").append(`<tr><td style='line-height:40px;'>
+                //                    ${item.FirstName} </td><td style='line-height:40px;'>
+                //                    ${item.LastName} </td><td  style='line-height:40px;>
+                //                    ${item.Email} </td><td  style='line-height:40px;><a href='ExamResults/${item.Id}'>Sınav Sonuçlarını İncele</a> </td></tr>`)
+                //    });
+                //}
             }
 
         })

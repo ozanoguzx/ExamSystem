@@ -38,6 +38,7 @@ namespace UI.Controllers
             stdList = stdRepo.GetAll();
             //stdList.AddRange( stdRepo.GetAll().Where(x => x.Classrooms.Any(cls => cls.TrainerID == trainerID && cls.Id== id)).ToList());
             ViewBag.studentCount = stdList.Count;
+
             
             return Json(stdList,JsonRequestBehavior.AllowGet);
         }

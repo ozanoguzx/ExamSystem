@@ -150,8 +150,8 @@ namespace UI.Views
             polarData.Clear();
             polarData = ChartValue();
             return Json(polarData, JsonRequestBehavior.AllowGet);
-            chartList.Clear();
-            polarData.Clear();
+            //chartList.Clear();
+            //polarData.Clear();
         }
 
         //USER LİST CHART
@@ -161,8 +161,8 @@ namespace UI.Views
             UserData.Clear();
             UserData = ChartUserValue();
             return Json(UserData, JsonRequestBehavior.AllowGet);
-            chartListUser.Clear();
-            UserData.Clear();
+            //chartListUser.Clear();
+            //UserData.Clear();
         }
 
         public ActionResult Error()
