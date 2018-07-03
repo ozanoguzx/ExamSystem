@@ -223,7 +223,7 @@ namespace UI.Controllers
         {
 
             List<Exam> examList = new List<Exam>();
-            SqlConnection con = new SqlConnection("server=.;database=Bas;uid=sa;pwd=Password1;");
+            SqlConnection con = new SqlConnection("server=.;database=Bas;Integrated security=true;");
 
             SqlCommand cmd = new SqlCommand("select ex.Id, ex.TrainerID, ex.ClassroomID, ex.Name, ex.ExamDate, ex.ExamStartTime, ex.ExamEndTime, ex.[State], ex.CreatedDate, ex.ModifiedDate, ex.ModifiedBy from Exam EX join Classroom CR on ex.ClassroomID = cr.Id inner join  StudentToClassroom sc on CR.Id = sc.ClassroomID inner join Student st on sc.StudentID = st.Id where st.Id = @Id", con);
 

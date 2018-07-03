@@ -12,7 +12,8 @@ using PagedList;
 namespace UI.Controllers
 {
 
-    [RolesAttribute(0)]
+    
+    [RolesAttribute(0,2)]
     public class QuestionController : Controller
     {
         QuestionsRepo quesRepo = new QuestionsRepo();
@@ -36,7 +37,7 @@ namespace UI.Controllers
 
             //HelperMetots.IsLogin();
             BasExamContext db = new BasExamContext();
-            List<Question> qlist = db.Questions.ToList();
+            List<Question> qlist = db.Questions.OrderByDescending(x=>x.CreatedDate).ToList();
             ViewBag.QuestionCount = qlist.Count;
             return View(qlist.ToPagedList(sayfa, 20));
         }
@@ -157,7 +158,8 @@ namespace UI.Controllers
                 {
                     question = new Question();
                 }
-
+                question.CreatedDate = DateTime.UtcNow;
+                question.TrainerID = (int)Session["UserID"];
                 question.A = model.A;
                 question.B = model.B;
                 question.C = model.C;

@@ -22,7 +22,7 @@ namespace BLL
                 {
                     result = context.SaveChanges() > 0;
                 }
-                catch (Exception ex)
+                catch 
                 {
                     return result;
                 }

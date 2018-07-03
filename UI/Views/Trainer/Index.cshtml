@@ -6,29 +6,29 @@
 }
 <script type="text/javascript">
     window.onload = function () {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "/Home/GetChartData",
-            success: function (data) {
-                $("#canvas_chart5").appear(function () {
-                    var ctx5 = $("#canvas_chart5").get(0).getContext("2d");
-                    window.myPolarArea = new Chart(ctx5).PolarArea(data, { responsive: true });
-                });
-            }
-        });
+        //$.ajax({
+        //    type: "GET",
+        //    dataType: "json",
+        //    url: "/Home/GetChartData",
+        //    success: function (data) {
+        //        $("#canvas_chart5").appear(function () {
+        //            var ctx5 = $("#canvas_chart5").get(0).getContext("2d");
+        //            window.myPolarArea = new Chart(ctx5).PolarArea(data, { responsive: true });
+        //        });
+        //    }
+        //});
 
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "/Home/GetChartDataUser",
-            success: function (data) {
-                $("#canvas_chart2").appear(function () {
-                    var ctx2 = $("#canvas_chart2").get(0).getContext("2d");
-                    window.myPie = new Chart(ctx2).Pie(data, { responsive: true });
-                });
-            }
-        });
+        //$.ajax({
+        //    type: "GET",
+        //    dataType: "json",
+        //    url: "/Home/GetChartDataUser",
+        //    success: function (data) {
+        //        $("#canvas_chart2").appear(function () {
+        //            var ctx2 = $("#canvas_chart2").get(0).getContext("2d");
+        //            window.myPie = new Chart(ctx2).Pie(data, { responsive: true });
+        //        });
+        //    }
+        //});
 
         $.ajax({
             type: "GET", dataType: "json",
@@ -56,53 +56,53 @@
             }
         })
 
-        $.ajax({
-            type: "GET", dataType: "json",
-            url: "/Home/GetClassData",
-            success: function (data) {
-                var barChartData = {
-                    labels: data.Class,
-                    datasets: [
-                        {
-                            fillColor: "rgba(220,220,220,0.5)",
-                            strokeColor: "rgba(220,220,220,0.8)",
-                            highlightFill: "rgba(220,220,220,0.75)",
-                            highlightStroke: "rgba(220,220,220,1)",
-                            data: data.Count
-                        },
-                    ]
-                }
+        //$.ajax({
+        //    type: "GET", dataType: "json",
+        //    url: "/Home/GetClassData",
+        //    success: function (data) {
+        //        var barChartData = {
+        //            labels: data.Class,
+        //            datasets: [
+        //                {
+        //                    fillColor: "rgba(220,220,220,0.5)",
+        //                    strokeColor: "rgba(220,220,220,0.8)",
+        //                    highlightFill: "rgba(220,220,220,0.75)",
+        //                    highlightStroke: "rgba(220,220,220,1)",
+        //                    data: data.Count
+        //                },
+        //            ]
+        //        }
 
-                $("#canvas_chart1").appear(function () {
-                    var ctx = $("#canvas_chart4").get(0).getContext("2d");
-                    window.myBar = new Chart(ctx).Bar(barChartData, { responsive: true });
-                });
-            }
-        })
+        //        $("#canvas_chart1").appear(function () {
+        //            var ctx = $("#canvas_chart4").get(0).getContext("2d");
+        //            window.myBar = new Chart(ctx).Bar(barChartData, { responsive: true });
+        //        });
+        //    }
+        //})
 
-        $.ajax({
-            type: "GET", dataType: "json",
-            url: "/Home/GetFullData",
-            success: function (data) {
-                var barChartData = {
-                    labels: data.Class,
-                    datasets: [
-                        {
-                            fillColor: "rgba(220,220,220,0.5)",
-                            strokeColor: "rgba(220,220,220,0.8)",
-                            highlightFill: "rgba(220,220,220,0.75)",
-                            highlightStroke: "rgba(220,220,220,1)",
-                            data: data.Count
-                        },
-                    ]
-                }
+        //$.ajax({
+        //    type: "GET", dataType: "json",
+        //    url: "/Home/GetFullData",
+        //    success: function (data) {
+        //        var barChartData = {
+        //            labels: data.Class,
+        //            datasets: [
+        //                {
+        //                    fillColor: "rgba(220,220,220,0.5)",
+        //                    strokeColor: "rgba(220,220,220,0.8)",
+        //                    highlightFill: "rgba(220,220,220,0.75)",
+        //                    highlightStroke: "rgba(220,220,220,1)",
+        //                    data: data.Count
+        //                },
+        //            ]
+        //        }
 
-                $("#canvas_chart1").appear(function () {
-                    var ctx = $("#canvas_chart10").get(0).getContext("2d");
-                    window.myBar = new Chart(ctx).Bar(barChartData, { responsive: true });
-                });
-            }
-        })
+        //        $("#canvas_chart1").appear(function () {
+        //            var ctx = $("#canvas_chart10").get(0).getContext("2d");
+        //            window.myBar = new Chart(ctx).Bar(barChartData, { responsive: true });
+        //        });
+        //    }
+        //})
     }
 
 
@@ -158,16 +158,16 @@
     <div class="content_spacer">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="padding:16px;border-color:#1B0000;"><h2 class="panel-title"> SORU HAVUZU</h2></div>
                         <div class="panel-body" style="background-color:#f6f6f6">
                             @*<h2 class="title1 upper centered">SORU HAVUZU</h2>*@
-                            <span class="spacer30"></span>
+                            @*<span class="spacer30"></span>
                             <canvas id="canvas_chart5"></canvas>
                         </div>
-                    </div>
-                </div>
+                    </div>*@
+                @*</div>*@
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="padding:16px; border-color:#1B0000;">
@@ -188,30 +188,29 @@
                     <div class="spacer40"></div>
                     <br />*@
 
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="padding:16px; border-color:#1B0000;">
                             <h1 class="panel-title">Kullanıcılar</h1>
                         </div>
                         <div class="panel-body">
-                            @*<h2 class="title1 upper centered"> Soru Ekleme Oranları</h2>*@
                             <span class="spacer30"></span>
                             <canvas id="canvas_chart2"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                </div>*@
+                @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="padding:16px; border-color:#1B0000;">
                             <h2 class="panel-title">SINIF BAŞARI DURUMLARI</h2>
-                        </div>
-                        <div class="panel-body">
+                        </div>*@
+                        @*<div class="panel-body">*@
                             @*<h2 class="title1 upper centered"> Soru Ekleme Oranları</h2>*@
-                            <span class="spacer30"></span>
+                            @*<span class="spacer30"></span>
                             <canvas id="canvas_chart4"></canvas>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 @*<br />
                     <br />
@@ -220,18 +219,18 @@
                     <div class="spacer40"></div>
                     <br />*@
 
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="padding:16px; border-color:#1B0000;">
                             <h2 class="panel-title">GENEL BAŞARI DURUMU</h2>
                         </div>
                         <div class="panel-body">
                             @*<h2 class="title1 upper centered"> Soru Ekleme Oranları</h2>*@
-                            <span class="spacer30"></span>
+                            @*<span class="spacer30"></span>
                             <canvas id="canvas_chart10"></canvas>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-md-6">
                 </div>
             </div>

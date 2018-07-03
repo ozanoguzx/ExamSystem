@@ -8,28 +8,25 @@
 @model IEnumerable<DAL.Data.Student>
 
 <script type="text/javascript">
-
     function getTable() {
         $("#studentTable").removeAttr("style");
         var classRoomID = $("#classroomList").val();
         $.ajax({
-            @*url: "@Url.Action("StudentsByClassroom", "TrainerStudent", new {id =  1017})",*@
             url : "/TrainerStudent/StudentsByClassroom/"+classRoomID,
             type: 'GET',
             success: function (data) {
-                //alert(data[0].FirstName)
-                //$("table tbody tr").remove();
-                //var count = Object.keys(data).length;
-                //if (count > 0) {
-                //    $.each(data, function (key, item) {
-                //        $("#studentTable tbody").append(`<tr><td style='line-height:40px;'>
-                //                    ${item.FirstName} </td><td style='line-height:40px;'>
-                //                    ${item.LastName} </td><td  style='line-height:40px;>
-                //                    ${item.Email} </td><td  style='line-height:40px;><a href='ExamResults/${item.Id}'>Sınav Sonuçlarını İncele</a> </td></tr>`)
-                //    });
-                //}
+                $("table tbody tr").remove();
+                var count = Object.keys(data).length;
+                if (count > 0) {
+                    $.each(data, function (key, item) {
+                        $("#studentTable tbody").append("<tr><td style='line-height:40px;'>" + 
+                                    item.FirstName + "</td><td style='line-height:40px;'>" + 
+                                    item.LastName + "</td><td style='line-height:40px;'>" + 
+                                    item.Email + "</td><td style='line-height:40px;'><a href='ExamResults/" + 
+                                    item.Id + "'>Sınav Sonuçlarını İncele</a></td></tr>");
+                    });
+                }
             }
-
         })
 
     }
@@ -43,10 +40,10 @@
                     <div>
                         @Html.DropDownList("classroomList", ViewBag.Classrooms as SelectList, "Lütfen Bir Sınıf Seçiniz", new { onchange = "javascript:getTable();" })
                     </div>
-
                     <table id="studentTable" style="visibility:hidden" class="table table-bordered table-striped table-responsive table-hover">
                         <thead>
                             <tr>
+
                                 <th scope="col">Ad</th>
                                 <th scope="col">Soyad</th>
                                 <th scope="col">Email</th>
@@ -54,20 +51,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @*@foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.FirstName
-                                        </td>
-
-                                        <td>@item.LastName</td>
-
-                                        <td>@item.Email</td>
-                                        <td><a id="" title="Düzenle" href="ExamResults/@item.Id">Sınav Sonuçlarını İncele</a></td>
-                                    </tr>
-                                }*@
                         </tbody>
                     </table>
                 </div>

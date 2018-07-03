@@ -10,7 +10,7 @@ namespace BLL
 {
    public class ClassroomRepo:IRepository<Classroom>
     {
-        BasExamContext context;
+        BasExamContext context = new BasExamContext();
         bool result = false;
 
         public bool Add(Classroom item)

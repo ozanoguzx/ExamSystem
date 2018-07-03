@@ -183,6 +183,10 @@ namespace UI.Views
                 {
                     return RedirectToAction("Index", "Student");
                 }
+                else if (Convert.ToInt32(Session["UserType"]) == 2)
+                {
+                    return RedirectToAction("Index", "Trainer");
+                }
             }
             return View();
         }

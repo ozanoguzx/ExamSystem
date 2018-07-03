@@ -136,7 +136,7 @@ namespace UI.Controllers
                     TempData["message"] = true;
                 }
             }
-            catch (Exception e)
+            catch 
             {
                 throw;
             }
